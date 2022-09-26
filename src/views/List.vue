@@ -13,7 +13,7 @@
         Deseja realmente excluir essa tarefa ? {{ taskSelected.subject }}
       </div>
       <div class="mt-3 d-flex justify-content-end">
-        <b-button variant="outline-secondary" @click="hiddeModal" class="mr-2"> Cancelar </b-button>
+        <b-button variant="outline-secondary" @click="hideModal" class="mr-2"> Cancelar </b-button>
         <b-button variant="outline-danger" @click="confirmRemoveTask" class="mr-2"> Excluir </b-button>
       </div>
     </b-modal>
@@ -41,6 +41,14 @@
         this.taskSelected.index = index;
 
         this.$refs.modalRemove.show()
+      },
+      hideModal() {
+        this.$refs.modalRemove.hide()
+      },
+      confirmRemoveTask() {
+        this.tasks.splice(this.taskSelected.index, 1);
+        localStorage.setItem("tasks", JSON.stringify(this.tasks))
+        this.hideModal()
       }
     }
   };
