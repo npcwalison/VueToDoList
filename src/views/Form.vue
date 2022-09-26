@@ -46,11 +46,18 @@
       if(this.$route.params.index === 0 || this.$route.params.index !== undefined) {
         this.methodsSave = 'update'
         let tasks = JSON.parse(localStorage.getItem("tasks"))
-        this.form =tasks[this.$route.params.index]
+        this.form = tasks[this.$route.params.index]
       }
     },
     methods: {
       saveTask() {
+        if(this.methodsSave === "update"){
+          let tasks = JSON.parse(localStorage.getItem("tasks"))
+          tasks[this.$route.params.index] = this.form;
+          localStorage.setItem("tasks", JSON.stringify(tasks))
+          this.$router.push({ name: "list" })
+          return;
+        }
         //verifica se há alguma task presente no localStorage, caso não haja nenhuma, ele retorna um array vazio
         let tasks = (localStorage.getItem("tasks")) ? JSON.parse(localStorage.getItem("tasks")) : []
         //adicionando tarefas do form no tasks, do tasks no localStorage

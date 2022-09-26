@@ -23,5 +23,3 @@ export default {
   comments: {},
 };
 </script>
-
-<style></style>
